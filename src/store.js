@@ -10,6 +10,9 @@ export default new Vuex.Store({
     activeBlock: 'none'
   },
   mutations: {
+    mine(state, rewardAddress) {
+      state.blockchain.minePendingTransactions(rewardAddress);
+    },
     addTransaction(state, { fromAddress, toAddress, amount, signingKey }) {
       const trans = new Transaction(fromAddress, toAddress, amount);
 
@@ -21,11 +24,6 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    mine({ state }, rewardAddress) {
-      setTimeout(() => {
-        alert('siema');
-      }, 2000);
-    } 
   },
   getters: {
     chain(state) {

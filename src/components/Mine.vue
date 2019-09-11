@@ -14,13 +14,14 @@ export default {
     name: "Mine",
     data() {
         return {
-            address: ''
+            address: '',
         }
     },
     methods: {
         click() {
             if(this.address !== '') {
-                this.$store.dispatch('mine', this.address);
+                this.$store.commit('mine', this.address);
+                this.$emit('click', event.target.value);
             } else {
                 alert("You have empty address!!!");
             }

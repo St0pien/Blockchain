@@ -33,7 +33,7 @@ export default {
   data() {
     return {
       transaction: false,
-      mine: true
+      mine: false
     }
   },
   computed: {

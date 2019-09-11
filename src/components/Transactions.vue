@@ -80,11 +80,19 @@ h1 {
 }
 
 td {
-    background: #ddd
+  background: #ddd;
+  border-right: 2px solid #ccc;
 }
 
-p:hover {
-  cursor: pointer;
-  color: #85bb65;
+td:nth-child(5) {
+  border-right: none;
 }
+
+p {
+  &:hover {
+    cursor: pointer;
+    color: #85bb65;
+  }
+}
+
 </style>

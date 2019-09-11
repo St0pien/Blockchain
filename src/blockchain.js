@@ -25,7 +25,7 @@ class Transaction {
     }
 
     isValid() {
-        if (this.fromAddress === null) return true;
+        if (this.fromAddress === "System") return true;
 
         if (!this.signature || this.signature.length === 0) {
           throw new Error('No signature in this transaction');
@@ -72,7 +72,7 @@ class Block {
 class Blockchain {
     constructor() {
         this.chain = [this.createGenesisBlock()];
-        this.difficulty = 4;
+        this.difficulty = 2;
         this.pendingTransactions = [];
         this.miningReward = 100;
     }
@@ -86,7 +86,7 @@ class Blockchain {
     }
 
     minePendingTransactions(miningRewardAddress) {
-        const rewardTx = new Transaction(null, miningRewardAddress, this.miningReward);
+        const rewardTx = new Transaction('System', miningRewardAddress, this.miningReward);
         this.pendingTransactions.push(rewardTx);
         
         let block = new Block(Date.now(), this.pendingTransactions, this.getLatestBlock().hash);
@@ -115,11 +115,11 @@ class Blockchain {
         this.chain.forEach(block => {
             block.transactions.forEach(trans => {
                if(trans.fromAddress === address) {
-                   balance -= trans.amount;
+                   balance -= Number(trans.amount);
                } 
 
                if(trans.toAddress === address) {
-                   balance += trans.amount;
+                   balance += Number(trans.amount);
                }
             });
         });
